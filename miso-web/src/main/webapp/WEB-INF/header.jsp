@@ -17,7 +17,8 @@
   <%-- timestamp to force browser to reload javascript --%>
   <jsp:useBean id="timestamp" class="java.util.Date" scope="request"/>
 
-  <title><c:if test="${not empty title}">${title} &mdash; </c:if>MISO LIMS ${misoInstanceName}</title>
+  <%-- <title><c:if test="${not empty title}">${title} &mdash; </c:if>MISO LIMS ${misoInstanceName}</title> --%>
+  <title><c:if test="${not empty title}">${title} | </c:if>NYU CGSB MISO LIMS ${misoInstanceName}</title>
 
   <!-- jQuery -->
   <script type="text/javascript" src="<c:url value='/scripts/jquery/js/jquery-3.6.0.min.js'/>"></script>
