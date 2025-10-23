@@ -1,0 +1,110 @@
+#!/bin/bash
+#
+# miso - A wrapper script to manage the MISO podman-compose service
+#
+set -e
+
+# --- Configuration ---
+# Path to your YAML file
+YML="/root/miso-lims/nyu.plain.yml"
+COMPOSE_CMD="podman-compose -f $YML"
+
+# --- Functions ---
+
+# Sets the required environment variables for starting or building
+set_env() {
+    export MISO_DB_USER=tgaclims
+    export MISO_DB=lims
+    export MISO_DB_PASSWORD_FILE=/root/bin/.miso_db_password
+    export MISO_DB_ROOT_PASSWORD_FILE=/root/bin/.miso_root_password
+    export MISO_TAG=latest
+    echo "Environment variables set."
+}
+
+# Starts the containers in detached mode
+start() {
+    echo "Starting MISO..."
+    set_env
+    $COMPOSE_CMD up -d
+    echo "MISO started."
+}
+
+# Stops and removes the containers
+stop() {
+    echo "Stopping MISO..."
+    $COMPOSE_CMD down
+    echo "MISO stopped."
+}
+
+# Restarts the containers
+restart() {
+    echo "Restarting MISO..."
+    $COMPOSE_CMD restart
+    echo "MISO restarted."
+}
+
+# Shows the status of the containers
+status() {
+    echo "MISO container status:"
+    $COMPOSE_CMD ps
+}
+
+# Rebuilds the containers
+build() {
+    echo "Rebuilding MISO..."
+    set_env
+    
+    echo "Step 1: Stopping and removing old containers..."
+    stop
+
+    echo "Step 2: Building and starting new containers..."
+    $COMPOSE_CMD up --build -d 
+    
+    echo "MISO rebuild complete."
+}
+
+# Displays the help message
+usage() {
+    echo "MISO Service Manager"
+    echo "Usage: miso [start|stop|restart|status|build]"
+    echo
+    echo "Commands:"
+    echo "  start    Start the MISO containers in the background"
+    echo "  stop     Stop and remove the MISO containers"
+    echo "  restart  Restart the MISO containers"
+    echo "  status   Show the status of the MISO containers"
+    echo "  build    Rebuild the containers"
+    exit 1
+}
+
+# --- Main Logic ---
+
+# Check if an argument was provided
+if [ -z "$1" ]; then
+    usage
+fi
+
+# Case statement to route the command
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        restart
+        ;;
+    status)
+        status
+        ;;
+    build)
+        build
+        ;;
+    *)
+        echo "Error: Unknown command '$1'"
+        echo
+        usage
+        ;;
+esac
+
