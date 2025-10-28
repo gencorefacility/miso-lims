@@ -39,8 +39,9 @@ services:
       MYSQL_USER: ${MISO_DB_USER}
       MYSQL_PASSWORD_FILE: /run/secrets/lims_password
     volumes:
-      - ${MISO_DB_ROOT_PASSWORD_FILE}:/run/secrets/root_password:Z
-      - ${MISO_DB_PASSWORD_FILE}:/run/secrets/lims_password:Z
+      - "${MISO_DB_ROOT_PASSWORD_FILE}:/run/secrets/root_password:Z"
+      - "${MISO_DB_PASSWORD_FILE}:/run/secrets/lims_password:Z"
+      - "/miso/db:/var/lib/mysql:Z"
 
   flyway:
     build:
@@ -53,7 +54,7 @@ services:
       - db
     volumes:
       - "${MISO_DB_ROOT_PASSWORD_FILE}:/run/secrets/root_password:Z"
-      - "misolims_db:/var/lib/mysql:Z"
+      #- "/miso/db:/var/lib/mysql:Z"
 
   webapp:
     build:
@@ -66,7 +67,7 @@ services:
       - db
     volumes:
       - "${MISO_DB_PASSWORD_FILE}:/run/secrets/lims_password:Z"
-      - "misolims_files:/storage/miso/files/:Z"
+      - "/miso/files:/storage/miso/files/:Z"
   
   nginx:
     image: nginx:1.15.12-alpine
@@ -80,9 +81,3 @@ services:
       - type: bind
         source: "./.docker/nginx/http.conf"
         target: "/etc/nginx/conf.d/default.conf:Z"
-
-volumes:
-  misolims_db:
-    driver: local
-  misolims_files:
-    driver: local
