@@ -5,7 +5,7 @@ anything is missing, please[let us know](https://github.com/miso-lims/miso-lims/
 
 Before developing MISO, the best first step is to set up your development environment and get MISO
 running. You can do that by following the
-[Bare Metal Install Guide](https://miso-lims.readthedocs.io/projects/docs/en/latest/admin/baremetal-installation-guide/).
+[Bare Metal Install Guide](https://miso-lims.readthedocs.io/en/latest/admin/baremetal-installation-guide/).
 
 ## Module Overview
 
@@ -120,7 +120,7 @@ plugin that is already configured for MISO.
 
 3. You should already have a database and user from your initial MISO setup. If not, create them
 now. See the
-[Bare Metal Install Guide](https://miso-lims.readthedocs.io/projects/docs/en/latest/admin/baremetal-installation-guide/).
+[Bare Metal Install Guide](https://miso-lims.readthedocs.io/en/latest/admin/baremetal-installation-guide/).
 4. Configure the Maven Flyway plugin to access your database. This is done by creating the file:
 `miso-lims/sqlstore/flyway.properties`. Replace the port, username, password, and database name
 below if necessary. This file is gitignored, so you don't have to worry about your credentials
@@ -374,6 +374,26 @@ serialized. Classes annotated with `@RestController` will do this automatically.
 The annotations mentioned above for MVC controllers are all useful for REST controllers too. Another
 useful annotation is `@RequestBody`, which can be added to a method parameter to use the value from
 the body of the request.
+
+### Mock Box Scanner
+
+The mock box scanner is a development and testing utility that simulates the behaviour of a physical
+box barcode scanner. It allows developers to exercise box scanning workflow in MISO without requiring access to 
+VisionMate or DP5 Mirage scanner hardware.
+
+#### Configuration
+
+The mock scanner is enabled using the standard box scanner configuration property: `miso.boxscanner.servers`. To enable the mock scanner, configure a scanner entry using `mock` type:
+
+Example: `Mock Scanner:mock:localhost:0`.
+
+#### Behaviour
+
+When configured, the mock scanner behaves like a real scanner from the application's perspective. It
+integrates with the existing scanning infrastructure.
+
+The mock scanner return deterministic, test-friendly scan results suitable for validating UI behaviour
+and scan result handling.
 
 ## Pinery-MISO
 

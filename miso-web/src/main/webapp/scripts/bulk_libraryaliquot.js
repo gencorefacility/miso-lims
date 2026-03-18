@@ -209,8 +209,11 @@ BulkTarget.libraryaliquot = (function ($) {
               "libraryAliquotIds",
               Urls.rest.worksets.addLibraryAliquots
             ),
+        BulkUtils.actions.attachFile("libraryaliquot", function (libraryAliquot) {
+          return libraryAliquot.projectId;
+        }),
         BulkUtils.actions.transfer("libraryAliquotIds"),
-      ];
+      ].concat(BulkUtils.actions.qc("LibraryAliquot"));
     },
     getFixedColumns: function (config) {
       return 2;
@@ -323,7 +326,7 @@ BulkTarget.libraryaliquot = (function ($) {
         },
       });
 
-      columns = columns.concat(BulkUtils.columns.detailedQcStatus());
+      columns = columns.concat(BulkUtils.columns.detailedQcStatus(config.pageMode));
       columns.push(BulkUtils.columns.dnaSize);
       columns = columns.concat(BulkUtils.columns.concentration());
       columns = columns.concat(BulkUtils.columns.volume(false, config));

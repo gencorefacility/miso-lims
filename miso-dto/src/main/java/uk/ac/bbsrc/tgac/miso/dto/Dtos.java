@@ -26,7 +26,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,94 +41,11 @@ import ca.on.oicr.gsi.runscanner.dto.NotificationDto;
 import ca.on.oicr.gsi.runscanner.dto.OxfordNanoporeNotificationDto;
 import ca.on.oicr.gsi.runscanner.dto.type.IndexSequencing;
 import jakarta.annotation.Nonnull;
-import uk.ac.bbsrc.tgac.miso.core.data.AbstractBoxPosition;
-import uk.ac.bbsrc.tgac.miso.core.data.AbstractBoxable;
-import uk.ac.bbsrc.tgac.miso.core.data.Aliasable;
-import uk.ac.bbsrc.tgac.miso.core.data.Array;
-import uk.ac.bbsrc.tgac.miso.core.data.ArrayModel;
-import uk.ac.bbsrc.tgac.miso.core.data.ArrayRun;
-import uk.ac.bbsrc.tgac.miso.core.data.Box;
-import uk.ac.bbsrc.tgac.miso.core.data.BoxPosition;
-import uk.ac.bbsrc.tgac.miso.core.data.BoxSize;
+import uk.ac.bbsrc.tgac.miso.core.data.*;
 import uk.ac.bbsrc.tgac.miso.core.data.BoxSize.BoxType;
-import uk.ac.bbsrc.tgac.miso.core.data.BoxUse;
-import uk.ac.bbsrc.tgac.miso.core.data.Boxable;
 import uk.ac.bbsrc.tgac.miso.core.data.Boxable.EntityType;
-import uk.ac.bbsrc.tgac.miso.core.data.ChangeLog;
-import uk.ac.bbsrc.tgac.miso.core.data.ConcentrationUnit;
-import uk.ac.bbsrc.tgac.miso.core.data.DetailedLibrary;
-import uk.ac.bbsrc.tgac.miso.core.data.DetailedQcStatus;
-import uk.ac.bbsrc.tgac.miso.core.data.DetailedSample;
-import uk.ac.bbsrc.tgac.miso.core.data.Experiment;
 import uk.ac.bbsrc.tgac.miso.core.data.Experiment.RunPartition;
-import uk.ac.bbsrc.tgac.miso.core.data.GroupIdentifiable;
-import uk.ac.bbsrc.tgac.miso.core.data.HierarchyEntity;
-import uk.ac.bbsrc.tgac.miso.core.data.Identifiable;
-import uk.ac.bbsrc.tgac.miso.core.data.IlluminaChemistry;
-import uk.ac.bbsrc.tgac.miso.core.data.IlluminaRun;
-import uk.ac.bbsrc.tgac.miso.core.data.Instrument;
-import uk.ac.bbsrc.tgac.miso.core.data.InstrumentDataManglingPolicy;
-import uk.ac.bbsrc.tgac.miso.core.data.InstrumentModel;
-import uk.ac.bbsrc.tgac.miso.core.data.InstrumentPosition;
-import uk.ac.bbsrc.tgac.miso.core.data.IonTorrentRun;
-import uk.ac.bbsrc.tgac.miso.core.data.Issue;
-import uk.ac.bbsrc.tgac.miso.core.data.Kit;
-import uk.ac.bbsrc.tgac.miso.core.data.KitImpl;
-import uk.ac.bbsrc.tgac.miso.core.data.LS454Run;
-import uk.ac.bbsrc.tgac.miso.core.data.Lab;
-import uk.ac.bbsrc.tgac.miso.core.data.Library;
-import uk.ac.bbsrc.tgac.miso.core.data.LibraryDesign;
-import uk.ac.bbsrc.tgac.miso.core.data.LibraryDesignCode;
-import uk.ac.bbsrc.tgac.miso.core.data.LibraryIndex;
-import uk.ac.bbsrc.tgac.miso.core.data.LibraryIndexFamily;
-import uk.ac.bbsrc.tgac.miso.core.data.LibrarySpikeIn;
-import uk.ac.bbsrc.tgac.miso.core.data.OxfordNanoporeRun;
-import uk.ac.bbsrc.tgac.miso.core.data.PacBioRun;
-import uk.ac.bbsrc.tgac.miso.core.data.Partition;
-import uk.ac.bbsrc.tgac.miso.core.data.PartitionQCType;
-import uk.ac.bbsrc.tgac.miso.core.data.Pool;
-import uk.ac.bbsrc.tgac.miso.core.data.Printer;
-import uk.ac.bbsrc.tgac.miso.core.data.Project;
-import uk.ac.bbsrc.tgac.miso.core.data.ReferenceGenome;
-import uk.ac.bbsrc.tgac.miso.core.data.Run;
-import uk.ac.bbsrc.tgac.miso.core.data.RunLibraryQcStatus;
-import uk.ac.bbsrc.tgac.miso.core.data.RunPartitionAliquot;
-import uk.ac.bbsrc.tgac.miso.core.data.Sample;
-import uk.ac.bbsrc.tgac.miso.core.data.SampleAliquot;
-import uk.ac.bbsrc.tgac.miso.core.data.SampleAliquotSingleCell;
-import uk.ac.bbsrc.tgac.miso.core.data.SampleClass;
-import uk.ac.bbsrc.tgac.miso.core.data.SampleIdentity;
-import uk.ac.bbsrc.tgac.miso.core.data.SampleNumberPerProject;
-import uk.ac.bbsrc.tgac.miso.core.data.SamplePurpose;
-import uk.ac.bbsrc.tgac.miso.core.data.SampleSingleCell;
-import uk.ac.bbsrc.tgac.miso.core.data.SampleSlide;
-import uk.ac.bbsrc.tgac.miso.core.data.SampleStock;
-import uk.ac.bbsrc.tgac.miso.core.data.SampleStockRna;
-import uk.ac.bbsrc.tgac.miso.core.data.SampleStockSingleCell;
-import uk.ac.bbsrc.tgac.miso.core.data.SampleTissue;
-import uk.ac.bbsrc.tgac.miso.core.data.SampleTissuePiece;
-import uk.ac.bbsrc.tgac.miso.core.data.SampleTissueProcessing;
-import uk.ac.bbsrc.tgac.miso.core.data.SampleType;
-import uk.ac.bbsrc.tgac.miso.core.data.SampleValidRelationship;
-import uk.ac.bbsrc.tgac.miso.core.data.ScientificName;
-import uk.ac.bbsrc.tgac.miso.core.data.SequencerPartitionContainer;
-import uk.ac.bbsrc.tgac.miso.core.data.SequencingControlType;
-import uk.ac.bbsrc.tgac.miso.core.data.SequencingOrder;
-import uk.ac.bbsrc.tgac.miso.core.data.SequencingParameters;
-import uk.ac.bbsrc.tgac.miso.core.data.ServiceRecord;
-import uk.ac.bbsrc.tgac.miso.core.data.SolidRun;
-import uk.ac.bbsrc.tgac.miso.core.data.Stain;
-import uk.ac.bbsrc.tgac.miso.core.data.StainCategory;
-import uk.ac.bbsrc.tgac.miso.core.data.Study;
-import uk.ac.bbsrc.tgac.miso.core.data.StudyType;
-import uk.ac.bbsrc.tgac.miso.core.data.Submission;
-import uk.ac.bbsrc.tgac.miso.core.data.Subproject;
-import uk.ac.bbsrc.tgac.miso.core.data.TissueMaterial;
-import uk.ac.bbsrc.tgac.miso.core.data.TissueOrigin;
-import uk.ac.bbsrc.tgac.miso.core.data.TissueType;
-import uk.ac.bbsrc.tgac.miso.core.data.UltimaRun;
-import uk.ac.bbsrc.tgac.miso.core.data.VolumeUnit;
-import uk.ac.bbsrc.tgac.miso.core.data.Workstation;
+import uk.ac.bbsrc.tgac.miso.core.data.RunItemQcStatus;
 import uk.ac.bbsrc.tgac.miso.core.data.impl.Assay;
 import uk.ac.bbsrc.tgac.miso.core.data.impl.AttachmentCategory;
 import uk.ac.bbsrc.tgac.miso.core.data.impl.BoxImpl;
@@ -239,20 +156,9 @@ import uk.ac.bbsrc.tgac.miso.core.data.impl.workset.WorksetItem;
 import uk.ac.bbsrc.tgac.miso.core.data.impl.workset.WorksetLibrary;
 import uk.ac.bbsrc.tgac.miso.core.data.impl.workset.WorksetLibraryAliquot;
 import uk.ac.bbsrc.tgac.miso.core.data.impl.workset.WorksetSample;
+import uk.ac.bbsrc.tgac.miso.core.data.impl.workset.WorksetPool;
 import uk.ac.bbsrc.tgac.miso.core.data.impl.workset.WorksetStage;
-import uk.ac.bbsrc.tgac.miso.core.data.qc.ContainerQC;
-import uk.ac.bbsrc.tgac.miso.core.data.qc.ContainerQcControlRun;
-import uk.ac.bbsrc.tgac.miso.core.data.qc.LibraryQC;
-import uk.ac.bbsrc.tgac.miso.core.data.qc.LibraryQcControlRun;
-import uk.ac.bbsrc.tgac.miso.core.data.qc.PoolQC;
-import uk.ac.bbsrc.tgac.miso.core.data.qc.PoolQcControlRun;
-import uk.ac.bbsrc.tgac.miso.core.data.qc.QC;
-import uk.ac.bbsrc.tgac.miso.core.data.qc.QcControl;
-import uk.ac.bbsrc.tgac.miso.core.data.qc.QcControlRun;
-import uk.ac.bbsrc.tgac.miso.core.data.qc.QcTarget;
-import uk.ac.bbsrc.tgac.miso.core.data.qc.RequisitionQC;
-import uk.ac.bbsrc.tgac.miso.core.data.qc.SampleQC;
-import uk.ac.bbsrc.tgac.miso.core.data.qc.SampleQcControlRun;
+import uk.ac.bbsrc.tgac.miso.core.data.qc.*;
 import uk.ac.bbsrc.tgac.miso.core.data.spreadsheet.SampleSpreadSheets;
 import uk.ac.bbsrc.tgac.miso.core.data.spreadsheet.SpreadSheetFormat;
 import uk.ac.bbsrc.tgac.miso.core.data.spreadsheet.Spreadsheet;
@@ -1203,6 +1109,9 @@ public class Dtos {
     setInteger(dto::setTargetCellRecovery, from.getTargetCellRecovery(), true);
     setString(dto::setLoadingCellConcentration, from.getLoadingCellConcentration());
     setString(dto::setDigestion, from.getDigestion());
+    if (from.getProbes() != null) {
+      dto.setProbes(from.getProbes().stream().map(ProbeDto::from).toList());
+    }
     return dto;
   }
 
@@ -1220,6 +1129,9 @@ public class Dtos {
     setInteger(to::setTargetCellRecovery, from.getTargetCellRecovery(), true);
     setBigDecimal(to::setLoadingCellConcentration, from.getLoadingCellConcentration());
     setString(to::setDigestion, from.getDigestion());
+    if (from.getProbes() != null) {
+      to.setProbes(from.getProbes().stream().map(ProbeDto::toSampleProbe).collect(Collectors.toSet()));
+    }
     return to;
   }
 
@@ -2446,6 +2358,7 @@ public class Dtos {
     dto.setId(from.getId());
     dto.setDate(formatDate(from.getDate()));
     dto.setCreator(from.getCreator().getFullName());
+    dto.setQcTarget(from.getEntity().getQcTarget().getLabel());
     setId(dto::setQcTypeId, from.getType());
     setString(dto::setResults, from.getResults());
     dto.setEntityId(from.getEntity().getId());
@@ -2471,6 +2384,13 @@ public class Dtos {
         ownerLibrary.setId(dto.getEntityId());
         newLibraryQc.setLibrary(ownerLibrary);
         to = newLibraryQc;
+        break;
+      case "LibraryAliquot":
+        LibraryAliquotQC newLibraryAliquotQc = new LibraryAliquotQC();
+        LibraryAliquot ownerLibraryAliquot = new LibraryAliquot();
+        ownerLibraryAliquot.setId(dto.getEntityId());
+        newLibraryAliquotQc.setLibraryAliquot(ownerLibraryAliquot);
+        to = newLibraryAliquotQc;
         break;
       case "Sample":
         SampleQC newSampleQc = new SampleQC();
@@ -2547,6 +2467,12 @@ public class Dtos {
           ((LibraryQC) qc).getControls().add(libraryQcControlRun);
           to = libraryQcControlRun;
           break;
+        case LibraryAliquot:
+            LibraryAliquotQcControlRun libraryAliquotQcControlRun = new LibraryAliquotQcControlRun();
+            libraryAliquotQcControlRun.setQc((LibraryAliquotQC) qc);
+            ((LibraryAliquotQC) qc).getControls().add(libraryAliquotQcControlRun);
+            to = libraryAliquotQcControlRun;
+            break;
         case Pool:
           PoolQcControlRun poolQcControlRun = new PoolQcControlRun();
           poolQcControlRun.setQc((PoolQC) qc);
@@ -2915,7 +2841,7 @@ public class Dtos {
         setIlluminaRunValues((IlluminaNotificationDto) from, (IlluminaRun) to);
         break;
       default:
-        throw new NotImplementedException();
+        throw new NotImplementedException("Unexpected platform type: " + to.getPlatformType());
     }
     return to;
   }
@@ -3452,6 +3378,9 @@ public class Dtos {
     dto.setStatus(from.getHealth().getKey());
     setDateString(dto::setStartDate, from.getStartDate());
     setDateString(dto::setCompletionDate, from.getCompletionDate());
+    setBoolean(dto::setQcPassed, from.getQcPassed(), true);
+    setString(dto::setQcUserName, maybeGetProperty(from.getQcUser(), User::getFullName));
+    setDateString(dto::setQcDate, from.getQcDate());
     setDateString(dto::setLastModified, from.getLastModified());
     return dto;
   }
@@ -3493,6 +3422,7 @@ public class Dtos {
     run.setHealth(HealthType.get(from.getStatus()));
     setLocalDate(run::setStartDate, from.getStartDate());
     setLocalDate(run::setCompletionDate, from.getCompletionDate());
+    setBoolean(run::setQcPassed, from.getQcPassed(), true);
     setDate(run::setLastModified, from.getLastModified());
     return run;
   }
@@ -3787,6 +3717,7 @@ public class Dtos {
     setWorksetItemIds(from.getWorksetSamples(), dto::setSampleIds);
     setWorksetItemIds(from.getWorksetLibraries(), dto::setLibraryIds);
     setWorksetItemIds(from.getWorksetLibraryAliquots(), dto::setLibraryAliquotIds);
+    setWorksetItemIds(from.getWorksetPools(), dto::setPoolIds);
     dto.setCreator(from.getCreator().getFullName());
     dto.setLastModified(formatDateTime(from.getLastModified()));
     return dto;
@@ -3812,7 +3743,7 @@ public class Dtos {
     setWorksetItems(workset::setWorksetLibraries, from.getLibraryIds(), WorksetLibrary::new, LibraryImpl::new);
     setWorksetItems(workset::setWorksetLibraryAliquots, from.getLibraryAliquotIds(), WorksetLibraryAliquot::new,
         LibraryAliquot::new);
-
+    setWorksetItems(workset::setWorksetPools, from.getPoolIds(), WorksetPool::new, PoolImpl::new);
     return workset;
   }
 
@@ -4300,7 +4231,7 @@ public class Dtos {
     setObject(to::setPartition, PartitionImpl::new, from.getPartitionId());
     setObject(to::setAliquot, ListLibraryAliquotView::new, from.getAliquotId());
     setObject(to::setPurpose, RunPurpose::new, from.getRunPurposeId());
-    setObject(to::setQcStatus, RunLibraryQcStatus::new, from.getQcStatusId());
+    setObject(to::setQcStatus, RunItemQcStatus::new, from.getQcStatusId());
     setString(to::setQcNote, from.getQcNote());
     setBoolean(to::setDataReview, from.getDataReview(), true);
     return to;
@@ -4540,16 +4471,16 @@ public class Dtos {
     return to;
   }
 
-  public static RunLibraryQcStatusDto asDto(RunLibraryQcStatus from) {
-    RunLibraryQcStatusDto to = new RunLibraryQcStatusDto();
+  public static RunItemQcStatusDto asDto(RunItemQcStatus from) {
+    RunItemQcStatusDto to = new RunItemQcStatusDto();
     setLong(to::setId, from.getId(), true);
     setString(to::setDescription, from.getDescription());
     setBoolean(to::setQcPassed, from.getQcPassed(), true);
     return to;
   }
 
-  public static RunLibraryQcStatus to(RunLibraryQcStatusDto from) {
-    RunLibraryQcStatus to = new RunLibraryQcStatus();
+  public static RunItemQcStatus to(RunItemQcStatusDto from) {
+    RunItemQcStatus to = new RunItemQcStatus();
     setLong(to::setId, from.getId(), false);
     setString(to::setDescription, from.getDescription());
     setBoolean(to::setQcPassed, from.getQcPassed(), true);
