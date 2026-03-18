@@ -7,6 +7,95 @@ Starting with version 1.29.0, the format of this file is based on
 
 ---------------------------------------------------------------------------------------------------
 
+## [3.18.0] - 2026-02-26
+
+### Changed
+
+* Box size can now be changed even if there are items in the box, as long as the new size has the same dimensions (rows and columns) as the old size
+
+### Fixed
+
+* Incorrect scanner error shown before scanner properly scanned box for barcode assignment.
+* When QC Status was not set on a bulk sample/library/aliquot table and the table was sorted, QC Status would set itself to "Not Ready" instead of remaining unset
+
+
+## [3.17.0] - 2026-02-12
+
+### Added
+
+* Qc status can be added to Array run.
+* Probes (AKA feature barcodes), which can be added to single cell tissue processing samples (detailed sample)
+* Probe sets for saving common sets of probes for reuse
+
+### Fixed
+
+* Server Error while loading Edit Array Run page if no arrays attached.
+
+
+## [3.16.0] - 2026-01-29
+
+### Added
+
+* Ability to add QCs to Library Aliquots.
+* User can scan an entire box at once to automatically assign and update barcodes for multiple positions. After scanning, they can review a visual summary with warnings and confirm or cancel the changes.
+
+### Changed
+
+* Tracking List downloads for samples, libraries, and library aliquots now include Requisition and Assay columns
+
+
+## [3.15.0] - 2026-01-15
+
+### Added
+
+* "Attach files" option is available to user to attach file for Library aliquots.
+* Pools can be added to Worksets.
+
+### Fixed
+
+* In plain sample mode, the Propagate Samples dialog included a "To" field that was intended for detailed sample mode only and contained several invalid options
+* Help text for "req" search term to clarify that it searches by requisition alias
+* The Requisitions and Transfers list pages were missing proper titles
+* Some file downloads were not working due to commas or other characters in the filename
+
+### Upgrade Notes
+
+* Updated Run Scanner to 2.3.1
+  
+
+
+## [3.14.2] - 2025-12-11
+
+### Fixed
+
+* Error when attempting to receive libraries from the Edit Project page or when selecting a project on
+  the Create Libraries page (plain sample mode only)
+* Error merging pools with certain alias patterns
+
+
+## [3.14.1] - 2025-11-06
+
+### Fixed
+
+* errors retrieving runs via Pinery
+
+
+## [3.14.0] - 2025-10-31
+
+### Changed
+
+* The following fields will now accept numbers with up to 6 digits before the decimal.
+  * "Concentration" field in samples, libraries, library aliquots, pool.
+  * "Parent ng Used" field in samples, libraries, library aliquots.
+  * "Initial Cell Concentration" in Single Cell samples (detailed sample).
+  * "Loading Cell Concentration" in Single Cell and Single Cell (stock) samples (detailed sample).
+
+### Fixed
+
+* Pinery now supports runs with multiple containers
+* 'Help' link to user manual
+
+
 ## [3.13.0] - 2025-10-09
 
 ### Added
