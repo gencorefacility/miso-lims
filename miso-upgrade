@@ -9,6 +9,8 @@ echo "=========================================="
 
 # 1. Load the exact environment variables
 set_env() {
+    export YML="/root/miso-lims/nyu.plain.yml"
+    export COMPOSE_CMD="podman-compose -f ${YML}"
     export MISO_DB_USER=tgaclims
     export MISO_DB=lims
     export MISO_DB_PASSWORD_FILE=/root/bin/.miso_db_password
@@ -58,19 +60,19 @@ git pull origin "$MISO_TAG" || true
 
 echo ""
 echo "--> Step 4: Pulling latest base images..."
-podman-compose pull
+${COMPOSE_CMD} pull
 
 echo ""
 echo "--> Step 5: Rebuilding local images from scratch (no cache)..."
-podman-compose build --no-cache
+${COMPOSE_CMD} build --no-cache
 
 echo ""
 echo "--> Step 6: Shutting down the current LIMS stack..."
-podman-compose down
+${COMPOSE_CMD} down
 
 echo ""
 echo "--> Step 7: Bringing the upgraded LIMS stack online..."
-podman-compose up -d
+${COMPOSE_CMD} up -d
 
 echo ""
 echo "--> Step 8: Cleaning up old dangling Podman layers..."
