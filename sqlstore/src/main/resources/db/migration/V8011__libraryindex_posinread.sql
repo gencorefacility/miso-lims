@@ -1,0 +1,2 @@
+ALTER TABLE LibraryIndex
+  ADD COLUMN `posInRead` INT NOT NULL DEFAULT 0;

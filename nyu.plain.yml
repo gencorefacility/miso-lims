@@ -68,6 +68,8 @@ services:
     volumes:
       - "${MISO_DB_PASSWORD_FILE}:/run/secrets/lims_password:Z"
       - "/miso/files:/storage/miso/files/:Z"
+      - "/root/miso-lims/nyu.miso.properties:/usr/local/tomcat/conf/Catalina/localhost/miso.properties:Z"
+      #- "/root/miso-lims/nyu.ldap.security.properties:/storage/miso/security.properties:Z"
   
   nginx:
     image: nginx:1.15.12-alpine

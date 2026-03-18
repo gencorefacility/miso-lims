@@ -117,6 +117,7 @@ public class DefaultLibraryIndexService extends AbstractSaveService<LibraryIndex
     to.setSequence(from.getSequence());
     to.setPosition(from.getPosition());
     to.setRealSequences(from.getRealSequences());
+    to.setPosInRead(from.getPosInRead());
   }
 
   @Override

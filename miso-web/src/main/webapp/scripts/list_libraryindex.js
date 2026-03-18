@@ -99,6 +99,7 @@ ListTarget.libraryindex = {
         iSortPriority: 1,
         mData: "position",
       },
+      { sTitle: "Pos in Read", mData: "posInRead", include: true }
     ];
   },
 };

@@ -29,6 +29,14 @@ start() {
     echo "MISO started."
 }
 
+# Starts the containers in detached mode
+start_debug() {
+    echo "Starting MISO..."
+    set_env
+    $COMPOSE_CMD up
+    echo "MISO started."
+}
+
 # Stops and removes the containers
 stop() {
     echo "Stopping MISO..."
@@ -39,7 +47,9 @@ stop() {
 # Restarts the containers
 restart() {
     echo "Restarting MISO..."
-    $COMPOSE_CMD restart
+    stop
+    sleep 10
+    start
     echo "MISO restarted."
 }
 
@@ -89,6 +99,9 @@ case "$1" in
     start)
         start
         ;;
+    start_debug)
+	start_debug
+	;;
     stop)
         stop
         ;;

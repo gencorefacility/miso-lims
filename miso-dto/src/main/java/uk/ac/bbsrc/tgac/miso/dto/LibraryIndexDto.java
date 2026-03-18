@@ -10,6 +10,7 @@ public class LibraryIndexDto {
   private int position = 1;
   private String sequence;
   private Set<String> realSequences;
+  private int posInRead = 0;
 
   public LibraryIndexFamilyDto getFamily() {
     return family;
@@ -33,6 +34,10 @@ public class LibraryIndexDto {
 
   public String getSequence() {
     return sequence;
+  }
+
+  public int getPosInRead() {
+    return posInRead;
   }
 
   public void setFamily(LibraryIndexFamilyDto family) {
@@ -65,5 +70,9 @@ public class LibraryIndexDto {
 
   public void setRealSequences(Set<String> realSequences) {
     this.realSequences = realSequences;
+  }
+
+  public void setPosInRead(int posInRead) {
+    this.posInRead = posInRead;
   }
 }

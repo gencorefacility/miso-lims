@@ -2831,6 +2831,7 @@ public class Dtos {
     dto.setPosition(from.getPosition());
     dto.setSequence(from.getSequence());
     dto.setRealSequences(from.getRealSequences() == null ? Collections.emptySet() : from.getRealSequences());
+    dto.setPosInRead(from.getPosInRead());
     if (includeFamily) {
       dto.setFamily(asDto(from.getFamily(), false));
     }
@@ -2845,6 +2846,7 @@ public class Dtos {
     setString(to::setSequence, from.getSequence());
     setInteger(to::setPosition, from.getPosition(), false);
     to.setRealSequences(from.getRealSequences());
+    setInteger(to::setPosInRead, from.getPosInRead(), false);
     return to;
   }
 

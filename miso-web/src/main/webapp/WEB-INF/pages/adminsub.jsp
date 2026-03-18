@@ -43,7 +43,7 @@
        </c:if>
         <a href="<c:url value="/deletions"/>">Deletion Log</a>
     </div>
-    
+<%--    
     <h2>Misc</h2>
     <div class="menu">
       <a href="<c:url value="/contact/list"/>">Contacts</a>
@@ -55,13 +55,15 @@
       </c:if>
       <a href="<c:url value="/workstation/list"/>">Workstations</a>
     </div>
-	
+--%>	
+<%--
     <h2>ENA</h2>
     <div class="menu">
         <a href="<c:url value="/studies"/>">Studies</a>
         <a href="<c:url value="/experiments"/>">Experiments</a>
         <a href="<c:url value="/submissions"/>">Submissions</a>
     </div>
+--%>
 
     <h2 class="menuDropdownTitle" onclick="Utils.ui.toggleElement('configurationMenu');">
       Configuration<span style="float:right" class="ui-icon ui-icon-triangle-1-s"></span>

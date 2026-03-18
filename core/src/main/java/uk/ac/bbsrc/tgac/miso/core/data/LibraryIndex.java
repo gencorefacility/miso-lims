@@ -69,6 +69,9 @@ public class LibraryIndex implements Deletable, Nameable, Serializable {
   @Column(nullable = false)
   private String sequence;
 
+  @Column(nullable = false)
+  private int posInRead = 0;
+
   private String realSequences;
 
   @Id
@@ -97,6 +100,10 @@ public class LibraryIndex implements Deletable, Nameable, Serializable {
     return sequence;
   }
 
+ public int getPosInRead() {
+    return posInRead;
+ }
+
   public void setFamily(LibraryIndexFamily family) {
     this.family = family;
   }
@@ -122,6 +129,10 @@ public class LibraryIndex implements Deletable, Nameable, Serializable {
     if (getSequence() == null || getFamily().hasFakeSequence())
       return getName();
     return getName() + " (" + getSequence() + ")";
+  }
+
+  public void setPosInRead(int posInRead) {
+    this.posInRead = posInRead;
   }
 
   @Override
