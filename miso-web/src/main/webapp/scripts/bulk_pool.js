@@ -215,6 +215,11 @@ BulkTarget.pool = (function ($) {
                 value: null,
               },
             ],
+            initial: Constants.defaultPoolQcPassed === "true"
+              ? "Ready"
+              : Constants.defaultPoolQcPassed === "false"
+                ? "Failed"
+                : undefined,
             getItemLabel: Utils.array.get("label"),
             getItemValue: Utils.array.get("value"),
           },
