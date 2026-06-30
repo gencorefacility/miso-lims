@@ -271,7 +271,7 @@ public class ConstantsController {
   @Value("${miso.required.bulk.kitLot:true}")
   private boolean requireKitLot;
   @Value("${miso.defaults.bulk.poolQcPassed:#{null}}")
-  private String defaultPoolQcPassed;
+  private Boolean defaultPoolQcPassed;
 
   @Resource
   private Boolean boxScannerEnabled;
