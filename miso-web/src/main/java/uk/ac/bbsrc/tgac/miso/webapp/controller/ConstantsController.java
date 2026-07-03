@@ -268,7 +268,7 @@ public class ConstantsController {
   private boolean showParentUsed;
   @Value("${miso.display.bulk.receipt:true}")
   private boolean showReceipt;
-  @Value("${miso.required.bulk.kitLot:true}")
+  @Value("${miso.required.kitLot:true}")
   private boolean requireKitLot;
   @Value("${miso.defaults.bulk.poolQcPassed:#{null}}")
   private Boolean defaultPoolQcPassed;
